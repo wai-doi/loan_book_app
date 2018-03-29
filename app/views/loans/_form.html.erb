@@ -21,6 +21,11 @@
     <%= form.text_field :book, id: :loan_book %>
   </div>
 
+  <div class="field">
+    <%= form.label :days %>
+    <%= form.select :days, (1..30), id: :loan_book %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
