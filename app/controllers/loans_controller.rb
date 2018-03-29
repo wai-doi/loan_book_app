@@ -1,20 +1,10 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:edit, :update, :destroy]
 
   # GET /loans
   # GET /loans.json
   def index
     @loans = Loan.all
-    @loan = Loan.new
-  end
-
-  # GET /loans/1
-  # GET /loans/1.json
-  def show
-  end
-
-  # GET /loans/new
-  def new
     @loan = Loan.new
   end
 
@@ -30,7 +20,7 @@ class LoansController < ApplicationController
 
     respond_to do |format|
       if @loan.save
-        format.html { redirect_to loans_path, notice: 'Loan was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
       else
         format.html { render :index }
@@ -44,7 +34,7 @@ class LoansController < ApplicationController
   def update
     respond_to do |format|
       if @loan.update(loan_params)
-        format.html { redirect_to loans_path, notice: 'Loan was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Loan was successfully updated.' }
         format.json { render :show, status: :ok, location: @loan }
       else
         format.html { render :edit }
