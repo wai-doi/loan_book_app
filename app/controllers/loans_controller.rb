@@ -26,13 +26,14 @@ class LoansController < ApplicationController
   # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
+    @loans = Loan.all
 
     respond_to do |format|
       if @loan.save
         format.html { redirect_to loans_path, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @loan.errors, status: :unprocessable_entity }
       end
     end
