@@ -1,11 +1,16 @@
 class LoansController < ApplicationController
   before_action :set_loan, only: [:edit, :update, :destroy]
 
+  def show_all
+    @loans = Loan.all.order(created_at: :desc)
+  end
+
   # GET /loans
   # GET /loans.json
   def index
-    @loans = Loan.all
+    p @loans = Loan.where(on_loan: true)
     @loan = Loan.new
+    @loan.on_loan ||= true
   end
 
   # GET /loans/1/edit
@@ -16,7 +21,8 @@ class LoansController < ApplicationController
   # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
-    @loans = Loan.all
+    @loan.on_loan ||= true
+    @loans = Loan.where(on_loan: true)
 
     respond_to do |format|
       if @loan.save
@@ -48,9 +54,15 @@ class LoansController < ApplicationController
   def destroy
     @loan.destroy
     respond_to do |format|
-      format.html { redirect_to loans_url, notice: 'Loan was successfully destroyed.' }
+      format.html { redirect_to all_path, notice: 'Loan was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def swich
+    @loan = Loan.find(params[:id])
+    @loan.update_attribute(:on_loan, false)
+    redirect_to root_path
   end
 
   private
