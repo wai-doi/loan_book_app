@@ -1,33 +1,39 @@
-<h2>履歴</h2>
+<div class="panel panel-success">
+  <div class="panel-heading">履歴</div>
+  <div class="panel-body">
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>貸出人</th>
-      <th>本のタイトル</th>
-      <th>借りた日</th>
-      <th>返却期限日</th>
-      <th>貸出期間</th>
-      <th>状態</th>
-      <th></th>
-    </tr>
-  </thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>氏名</th>
+          <th>本のタイトル</th>
+          <th>借りた日</th>
+          <th>返却期限日</th>
+          <th>貸出期間</th>
+          <th>状態</th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @loans.each do |loan| %>
-      <tr>
-        <td><%= loan.name %></td>
-        <td><%= loan.book %></td>
-        <td><%= loan.created_at.strftime('%Y年%m月%d日') %></td>
-        <td><%= loan.created_at.since(loan.days.day).strftime('%Y年%m月%d日') %></td>
-        <th><%= loan.days %>日</th>
-        <th><%= loan.on_loan ? "貸出中" : "返却済み" %></th>
-        <td>
-          <%= button_to loan, method: :delete, data: { confirm: "#{loan.book}の履歴を削除しますか?" } do %>
-          削除
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @loans.each do |loan| %>
+          <tr>
+            <td><%= loan.name %></td>
+            <td><%= loan.book %></td>
+            <td><%= loan.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= loan.created_at.since(loan.days.day).strftime('%Y/%m/%d') %></td>
+            <th><%= loan.days %>日</th>
+            <th><%= loan.on_loan ? "貸出中" : "返却済み" %></th>
+            <td>
+              <%= button_to loan, method: :delete, data: { confirm: "#{loan.book}の履歴を削除しますか?" } do %>
+              削除
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>

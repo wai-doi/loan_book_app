@@ -11,22 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name, "氏名" %>
-    <%= form.text_field :name, id: :loan_name %>
+    <%= form.text_field :name, id: :loan_name, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :book, "本のタイトル" %>
-    <%= form.text_field :book, id: :loan_book %>
+    <%= form.text_field :book, id: :loan_book, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :days, "期間" %>
-    <%= form.select :days, (1..30), id: :loan_book %>日
+    <%= form.select :days, (1..30), id: :loan_book, class: "form-control" %>日
   </div>
 
   <div class="actions">
-    <%= form.submit(controller.action_name == 'edit' ? "編集する" : "本を借りる") %>
+    <%= form.submit(controller.action_name == 'edit' ? "編集する" : "本を借りる",
+      class: "btn btn-primary") %>
   </div>
 <% end %>
