@@ -1,5 +1,7 @@
 class LoansController < ApplicationController
   before_action :set_loan, only: [:edit, :update, :destroy]
+  before_action :set_loans, only: [:index, :edit, :create]
+  before_action :set_users, only: [:index, :create, :edit]
 
   def show_all
     @loans = Loan.all.order(created_at: :desc)
@@ -8,7 +10,6 @@ class LoansController < ApplicationController
   # GET /loans
   # GET /loans.json
   def index
-    p @loans = Loan.where(on_loan: true)
     @loan = Loan.new
     @loan.on_loan ||= true
   end
@@ -20,9 +21,9 @@ class LoansController < ApplicationController
   # POST /loans
   # POST /loans.json
   def create
-    @loan = Loan.new(loan_params)
+    user = User.find_by(name: params[:loan][:name])
+    @loan = user.loans.build(loan_params)
     @loan.on_loan ||= true
-    @loans = Loan.where(on_loan: true)
 
     respond_to do |format|
       if @loan.save
@@ -69,6 +70,14 @@ class LoansController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_loan
       @loan = Loan.find(params[:id])
+    end
+
+    def set_loans
+      @loans = Loan.where(on_loan: true)
+    end
+
+    def set_users
+      @users = User.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

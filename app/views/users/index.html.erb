@@ -1,0 +1,38 @@
+
+<div class="panel panel-default">
+  <div class="panel-heading">新規登録</div>
+  <div class="panel-body">
+    <%= render 'user_form', user: @user %>
+  </div>
+</div>
+
+<% if @users.present? %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">登録済みユーザー</div>
+  <div class="panel-body">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>氏名</th>
+          <th>貸し出し数</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <% @users.each do |user| %>
+      <tbody>
+        <td><%= user.name %></td>
+        <td><%= user.loans.count(&:on_loan) %></td>
+        <td><%= link_to "編集", edit_user_path(user) %></td>
+        <td><%= link_to "削除", user_path(user), method: :delete, data: {confirm: "#{user.name}を削除しますか？"} %></td>
+        <% end %>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+
+<% end %>

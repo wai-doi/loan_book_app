@@ -1,5 +1,8 @@
-<h1>Editing Loan</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">編集</div>
+  <div class="panel-body">
+    <%= render 'form', loan: @loan %>
+  </div>
+</div>
 
-<%= render 'form', loan: @loan %>
-
-<%= link_to 'Topへ戻る', root_path %>
+<%= render 'on_loan_list' %>
