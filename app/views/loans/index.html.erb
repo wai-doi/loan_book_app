@@ -1,11 +1,7 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
-<%= link_to root_path do %>
-<h1>貸し出しノート</h1>
-<% end %>
-
 <%= render 'form', loan: @loan %>
 
+
+<div class="mt-10">
 <table class="table">
   <thead>
     <tr>
@@ -37,5 +33,4 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to "履歴", '/all' %>
+</div>
