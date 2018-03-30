@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with(model: user, local: true, class: "form-horizontal") do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this loan from being saved:</h2>
@@ -13,13 +13,17 @@
 
 
   <div class="form-group">
-    <%= form.label :name, "氏名" %>
+    <%= form.label :name, "氏名", class: "control-label col-xs-1" %>
+    <div class="col-xs-4">
     <%= form.text_field :name, id: :user_name, class: "form-control" %>
+    </div>
   </div>
 
 
-  <div class="actions">
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-11">
     <%= form.submit(controller.action_name == 'edit' ? "編集する" : " 登録する",
       class: "btn btn-primary") %>
+    </div>
   </div>
 <% end %>

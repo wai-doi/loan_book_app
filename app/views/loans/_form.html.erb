@@ -1,4 +1,4 @@
-<%= form_with(model: loan, local: true) do |form| %>
+<%= form_with(model: loan, local: true, class: "form-horizontal") do |form| %>
   <% if loan.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
@@ -12,22 +12,30 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name, "氏名" %>
-    <%= form.select :name, @users.map(&:name), id: :loan_name, class: "form-control" %>
+    <%= form.label :name, "氏名", class: "control-label col-xs-2" %>
+    <div class="col-xs-4">
+      <%= form.select :name, @users.map(&:name),{}, {id: :loan_name, class: "form-control"} %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= form.label :book, "本のタイトル" %>
+    <%= form.label :book, "本のタイトル", class: "control-label col-xs-2" %>
+    <div class="col-xs-10">
     <%= form.text_field :book, id: :loan_book, class: "form-control" %>
   </div>
-
-  <div class="form-group">
-    <%= form.label :days, "期間" %>
-    <%= form.select :days, (1..30), id: :loan_book, class: "form-control" %>日
   </div>
 
-  <div class="actions">
+  <div class="form-group">
+    <%= form.label :days, "期間", class: "control-label col-xs-2" %>
+    <div class="col-xs-2">
+    <%= form.select :days, (1..30).map{|x| x.to_s+"日"}, {},  {id: :loan_book, class: "form-control col-xs-2"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-offset-2 col-sm-10">
     <%= form.submit(controller.action_name == 'edit' ? "編集する" : "本を借りる",
       class: "btn btn-primary") %>
+    </div>
   </div>
 <% end %>
